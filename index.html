@@ -16,11 +16,11 @@
     <main>
         <h1>Gerenciador de Projetos</h1>
         <div id="projetos-container">
-        <div id="projetosBar">
-            <h2>Área de projetos</h2>
-            <button id="addProjectButton">Adicionar projeto</button>
-        </div>
-        <div id="projetosArea"></div>
+            <div id="projetosBar">
+                <h2>Área de projetos</h2>
+                <button id="addProjectButton">Adicionar projeto</button>
+            </div>
+            <div id="projetosArea"></div>
         </div>
     </main>
     <div id="overlay"></div>
@@ -30,6 +30,46 @@
             <p>Digite o nome do projeto:</p>
             <input type="text" id="projectName" placeholder="Digite o nome" required>
             <input type="reset" value="Cancelar" id="cancelProject"><input type="submit" value="Criar" id="createProject">
+        </form>
+    </div>
+    <div id="projectEditorSpace">
+        <div id="projectEditorBar">
+            <h2 id="projectEditorTitle">Projeto em edição: </h2>
+            <button id="addFileButton">Adicionar</button>
+        </div>
+        <div id="projectEditorStatusContainer">
+            <div id="projectEditorStatus">
+                <h2 id="projectEditorStatusTitle">Explorador</h2>
+                <div id="projectEditorStatusArea"></div>
+            </div>
+        </div>
+    </div>
+    <button id="backToProjectsArea">Voltar para Área de projetos</button>
+    <div id="fileMaker">
+        <h2>Criador de Arquivos</h2>
+        <form id="fileMakerForm">
+            <p>Digite o nome do arquivo:</p>
+            <input type="text" id="fileName" placeholder="Digite o nome" required>
+            <p>Selecione o tipo do arquivo</p>
+            <select id="fileType">
+                <option value="diretorio">Diretório</option>
+                <option value="txt" selected>Texto (padrão)</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">Javascript</option>
+                <option value="py">Python</option>
+            </select>
+            <input type="reset" value="Cancelar" id="cancelFile"><input type="submit" value="Criar" id="createFile">
+        </form>
+    </div>
+    <div id="fileEditor">
+        <h2>Editor de Arquivos</h2>
+        <form id="fileEditorForm">
+            <p>Nome do arquivo:</p>
+            <input type="text" id="fileEditorName" placeholder="Digite o nome aqui" required>
+            <p>Edite o conteúdo do arquivo:</p>
+            <textarea id="fileContentEditor" rows="15" placeholder="Digite o texto aqui" required></textarea>
+            <input type="reset" value="Cancelar" id="cancelEdition"><input type="submit" value="Editar" id="editEdition">
         </form>
     </div>
 

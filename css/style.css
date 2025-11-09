@@ -7,6 +7,7 @@
     --padrao: rgb(0, 0, 0);
     --backgroundEditorpadrao: rgb(46, 46, 46);
     --backgroundEditorDestaque: rgb(31, 31, 31);
+    --afirmativeColor: rgb(40, 120, 30);
     --colorPadrao: rgb(255, 255, 255);
     --larguraProjetos: 50vw;
 }
@@ -56,6 +57,9 @@ h1 {
     color: var(--colorPadrao);
     padding: 8px 8px 8px 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#projetosBar h2 {
+    font-size: 1.6rem;
 }
 #no-projects {
     text-align: center;
@@ -157,18 +161,310 @@ main {
     border-radius: 5px;
     border: 2px solid var(--colorPadrao);
     transition: all 400ms;
-    cursor: pointer;
 }
 
 .removeButton {
     width: 32px;
     position:relative;
     right: -75px;
-    top: -50px;
+    cursor: pointer;
+    top: -95px;
     transition: all 400ms;
 }
 .removeButton:hover {
     transform: scale(1.2);
     transition: all 400ms;
     filter: brightness(0.6);
+}
+
+.acessButton {
+    background-color: var(--afirmativeColor);
+    position: relative;
+    top: 15px;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: var(--colorPadrao);
+    text-align: center;
+    cursor: pointer;
+    transition: all 400ms;
+}
+.acessButton:hover {
+    transform: scale(1.1);
+    transition: all 400ms;
+    filter: brightness(0.7);
+}
+
+#projectEditorSpace {
+    display: none;
+    flex-direction: column;
+    border: 2px solid var(--colorPadrao);
+    padding: 25px;
+    width: var(--larguraProjetos);
+    margin: 10px auto;
+}
+
+#projectEditorBar {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border: 2px solid var(--colorPadrao);
+    background-color: var(--backgroundEditorpadrao);
+    align-items: center;
+    padding: 8px 8px 8px 15px;
+}
+
+#addFileButton {
+    width: 120px;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-size: 1.4rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 2px solid var(--colorPadrao);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 400ms;
+    padding: 5px;
+}
+#addFileButton:hover {
+    transition: all 400ms;
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+#projectEditorBar h2 {
+    color: var(--colorPadrao);
+    font-size: 1.6rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#projectEditorStatusContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#projectEditorStatus {
+    background-color: var(--backgroundEditorpadrao);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--colorPadrao);
+}
+#projectEditorStatus h2 {
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+}
+
+#no-files {
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 10px;
+}
+
+#fileMaker {
+    background-color: var(--backgroundEditorpadrao);
+    color: var(--colorPadrao);
+    width: var(--larguraProjetos);
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid var(--colorPadrao);
+    display: none;
+    position: absolute;
+    z-index: 2;
+    flex-direction: column;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#fileMakerForm {
+    display: grid;
+    margin: 10px;
+    gap: 12px;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+#fileMaker h2 {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 2.2rem;
+}
+#fileMakerForm input[type='submit'], #fileMakerForm input[type='reset']{
+    width: 110px;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid var(--colorPadrao);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: all 400ms;
+}
+#fileMakerForm input[type='submit']:hover, #fileMakerForm input[type='reset']:hover {
+    transition: all 400ms;
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+#fileMakerForm input[type='text']{
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-size: 1.3rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 5px 5px 5px 10px;
+    border: 2px solid var(--colorPadrao);
+    border-radius: 5px;
+}
+#fileMakerForm p {
+    font-size: 1.4rem;
+}
+
+#fileMakerForm select {
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 5px 5px 5px 10px;
+    font-size: 1.2rem;
+    border: 2px solid var(--colorPadrao);
+}
+
+.file {
+    display: flex;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    padding: 5px;
+    align-items: center;
+    margin: 6px;
+    justify-content: space-between;
+    border: 2px solid var(--colorPadrao);
+}
+.removeFileButton {
+    width: 32px;
+    position: relative;
+    top: -20px;
+    cursor: pointer;
+    transition: all 400ms;
+    right: -20px;
+}
+
+.removeFileButton:hover {
+    transform: scale(1.2);
+    transition: all 400ms;
+    filter: brightness(0.6);
+}
+
+.editFileButton {
+    transition: all 400ms;
+    width: 80px;
+    font-size: 1.3rem;
+    background-color: var(--afirmativeColor);
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    cursor: pointer;
+}
+
+.editFileButton:hover {
+    transform: scale(1.1);
+    transition: all 400ms;
+    filter: brightness(0.7);
+}
+
+.fileTitle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fileTitleImg {
+    width: 40px;
+}
+
+#backToProjectsArea {
+    cursor: pointer;
+    display: none;
+    width: 20vw;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    margin: 10px auto;
+    border: 2px solid var(--colorPadrao);
+    color: var(--colorPadrao);
+    background-color: var(--backgroundEditorpadrao);
+    transition: all 400ms;
+}
+#backToProjectsArea:hover {
+    transition: all 400ms;
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+#fileEditor {
+    background-color: var(--backgroundEditorpadrao);
+    color: var(--colorPadrao);
+    width: var(--larguraProjetos);
+    margin: 0 auto;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    z-index: 2;
+    position: absolute;
+    border: 2px solid var(--colorPadrao);
+    align-items: center;
+}
+
+#fileEditor h2 {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.2rem;
+    margin: 10px 0px 5px 0px;
+}
+#fileEditorForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 45vw;
+    gap: 8px;
+}
+#fileEditorForm p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+}
+#fileEditorForm input[type='reset'], #fileEditorForm input[type='submit'] {
+    width: 130px;
+    font-size: 1.3rem;
+    margin: 10px auto;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--colorPadrao);
+    cursor: pointer;
+    color: var(--colorPadrao);
+    background-color: var(--backgroundEditorDestaque);
+    transition: all 400ms;
+}
+#fileEditorForm input[type='reset']:hover, #fileEditorForm input[type='submit']:hover {
+    transition: all 400ms;
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+#fileEditorForm input[type='text'] {
+    padding: 5px 5px 5px 10px;
+    font-size: 1.3rem;
+    color: var(--colorPadrao);
+    border: 2px solid var(--colorPadrao);
+    border-radius: 5px;
+    background-color: var(--backgroundEditorDestaque);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#fileEditorForm textarea {
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    padding: 5px 5px 5px 10px;
 }

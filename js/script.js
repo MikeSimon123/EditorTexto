@@ -5,6 +5,19 @@ const formAddProject = document.getElementById("projetoDesc")
 const cancelProject = document.getElementById("cancelProject")
 const createProject = document.getElementById("createProject")
 const projectName = document.getElementById("projectName")
+const projectSpace = document.getElementById("projectEditorSpace")
+const projectTitle = document.getElementById("projectEditorTitle")
+const projectExplorer = document.getElementById("projectEditorStatusArea")
+const addFileButton = document.getElementById("addFileButton")
+const fileMaker = document.getElementById("fileMaker")
+const cancelFile = document.getElementById("cancelFile")
+const createFile = document.getElementById("createFile")
+const fileName = document.getElementById("fileName")
+const fileType = document.getElementById("fileType")
+const projectsContainer = document.getElementById("projetos-container")
+const backToProjectsArea = document.getElementById("backToProjectsArea")
+const fileEditor = document.getElementById("fileEditor")
+const cancelEdition = document.getElementById("cancelEdition")
 
 function atualizarProjetos() {
     projetos.innerHTML = ""
@@ -13,6 +26,7 @@ function atualizarProjetos() {
         let projeto = document.createElement("div")
         projeto.innerHTML = `
             <p>${elemento.name}</p>
+            <button id='${elemento.name}' class='acessButton'>Acessar</button>
             <img src='img/close.png' class='removeButton' id='removeButton${elemento.name}'>
         `
         projeto.classList.add("projeto")
@@ -33,8 +47,101 @@ function atualizarProjetos() {
             projetos.innerHTML = "<p id='no-projects'>Ainda não existem projetos salvos</p>"
             }
         })
+        document.getElementById(`${elemento.name}`).addEventListener("click", function(){
+            localStorage.setItem("projeto", elemento.name)
+            projectSpace.style.display = "flex"
+            projectsContainer.style.display = "none"
+            backToProjectsArea.style.display = "flex"
+            atualizarProjeto()
+        })
     })
 }
+function atualizarProjeto(){
+    projectTitle.innerHTML = `Projeto em edição: ${localStorage.getItem("projeto")}`
+    let arquivos = []
+    JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
+        if(elemento.name == localStorage.getItem("projeto")){
+            arquivos = elemento.arquivos
+        }
+    })
+    if(arquivos.length == 0){
+        projectExplorer.innerHTML = `<p id='no-files'>Nenhum arquivo ou diretório em ${localStorage.getItem("projeto")}</p>`
+    } else {
+        projectExplorer.innerHTML = ""
+        arquivos.forEach(arquivo => {
+            let name = ""
+            if(arquivo.type == "diretorio"){
+                name = `${arquivo.name}`
+            } else {
+                name = `${arquivo.name}.${arquivo.type}`
+            }
+            
+            let arquivoV = document.createElement("div")
+            arquivoV.classList.add("file")
+            arquivoV.innerHTML = `
+                <div class='fileTitle'><img src='img/${arquivo.type}.png' class='fileTitleImg'><p>${name}</p></div>
+                <button class='editFileButton' id='${arquivo.name}edit'>Editar</button>
+                <img src='img/close.png' class='removeFileButton' id='${arquivo.name}'>
+            `
+            projectExplorer.appendChild(arquivoV)
+            document.getElementById(`${arquivo.name}`).addEventListener("click", function(){
+                let indexA = 0
+                JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
+                    if(elemento.name == localStorage.getItem("projeto")){
+                        elemento.arquivos.forEach((element, index) => {
+                            if(element.name == arquivo.name){
+                                indexA = index
+                            }
+                        })
+                    }
+                })
+                let desatualizado = JSON.parse(localStorage.getItem("projetos"))
+                desatualizado.forEach(elemento => {
+                    if(elemento.name == localStorage.getItem("projeto")){
+                        elemento.arquivos.splice(indexA, 1)
+                    }
+                })
+                localStorage.setItem("projetos", JSON.stringify(desatualizado))
+                atualizarProjeto()
+            })
+            document.getElementById(`${arquivo.name}edit`).addEventListener("click", function(){
+                overlay.style.display = "block"
+                fileEditor.style.display = "flex"
+                fileEditor.style.top = `${(document.body.offsetHeight - fileEditor.offsetHeight/2)/2}px`
+                fileEditor.style.left = `${(document.body.offsetWidth - fileEditor.offsetWidth)/2}px`
+            })
+        })
+    }
+}
+addFileButton.addEventListener("click", function(){
+    if(localStorage.hasOwnProperty("projeto")){
+        overlay.style.display = "block"
+        
+        fileMaker.style.display = "flex"
+        fileMaker.style.top = `${(document.body.offsetHeight - fileMaker.offsetHeight)/2}px`
+        fileMaker.style.left = `${(document.body.offsetWidth - fileMaker.offsetWidth)/2}px`
+    }
+})
+cancelFile.addEventListener("click", function(){
+    overlay.style.display = "none"
+    fileMaker.style.display = "none"
+})
+createFile.addEventListener("click", function(e){
+    if(localStorage.hasOwnProperty("projeto")){
+        e.preventDefault()
+        overlay.style.display = "none"
+        fileMaker.style.display = "none"
+        let arquivo = {name:fileName.value, type:fileType.value}
+        let desatualizado = JSON.parse(localStorage.getItem("projetos"))
+        desatualizado.forEach(elemento => {
+            if(elemento.name == localStorage.getItem("projeto")){
+                elemento.arquivos.push(arquivo)
+            }
+        })
+        localStorage.setItem("projetos", JSON.stringify(desatualizado))
+        atualizarProjeto()
+    }
+})
 window.addEventListener("DOMContentLoaded", function(){
     if(localStorage.hasOwnProperty("projetos") && JSON.parse(localStorage.getItem("projetos")).length > 0){
         projetos.style.display = "grid"
@@ -69,4 +176,15 @@ addProjectButton.addEventListener("click", function(){
     formAddProject.style.display = "flex"
     formAddProject.style.top = `${(document.body.offsetHeight - formAddProject.offsetHeight)/2}px`
     formAddProject.style.left = `${(document.body.offsetWidth - formAddProject.offsetWidth)/2}px`
+})
+
+backToProjectsArea.addEventListener("click", function(){
+    projectSpace.style.display = "none"
+    projectsContainer.style.display = "flex"
+    backToProjectsArea.style.display = "none"
+})
+
+cancelEdition.addEventListener("click", function(){
+    overlay.style.display = "none"
+    fileEditor.style.display = "none"
 })
