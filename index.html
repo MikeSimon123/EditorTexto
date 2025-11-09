@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Teste de Editor de Texto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h1>Teste de Editor de texto</h1>
+    <div id="editor-container">
+        <h2>Editor de Texto</h2>
+        <form id="editor-form">
+            <p>Digite o nome do arquivo:</p>
+            <input type="text" id="editor-name" placeholder="Digite o nome do arquivo">
+            <p>Escreva alguma coisa:</p>
+            <textarea id="editor-area" placeholder="Digite alguma coisa" rows="15"></textarea>
+            <p>Selecione o tipo do arquivo:</p>
+            <select id="editor-extensao">
+                <option value="txt" selected>Texto padrão</option>
+                <option value="py">Python</option>
+                <option value="css">CSS</option>
+                <option value="html">HTML</option>
+                <option value="js">Javascript</option>
+            </select>
+            <input type="reset" value="Resetar">
+            <input type="submit" value="Criar">
+        </form>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
