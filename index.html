@@ -13,24 +13,23 @@
 </head>
 
 <body>
-    <h1>Teste de Editor de texto</h1>
-    <div id="editor-container">
-        <h2>Editor de Texto</h2>
-        <form id="editor-form">
-            <p>Digite o nome do arquivo:</p>
-            <input type="text" id="editor-name" placeholder="Digite o nome do arquivo">
-            <p>Escreva alguma coisa:</p>
-            <textarea id="editor-area" placeholder="Digite alguma coisa" rows="15"></textarea>
-            <p>Selecione o tipo do arquivo:</p>
-            <select id="editor-extensao">
-                <option value="txt" selected>Texto padrão</option>
-                <option value="py">Python</option>
-                <option value="css">CSS</option>
-                <option value="html">HTML</option>
-                <option value="js">Javascript</option>
-            </select>
-            <input type="reset" value="Resetar">
-            <input type="submit" value="Criar">
+    <main>
+        <h1>Gerenciador de Projetos</h1>
+        <div id="projetos-container">
+        <div id="projetosBar">
+            <h2>Área de projetos</h2>
+            <button id="addProjectButton">Adicionar projeto</button>
+        </div>
+        <div id="projetosArea"></div>
+        </div>
+    </main>
+    <div id="overlay"></div>
+    <div id="projetoDesc">
+        <h2>Informações do Projeto</h2>
+        <form id="projectForm">
+            <p>Digite o nome do projeto:</p>
+            <input type="text" id="projectName" placeholder="Digite o nome" required>
+            <input type="reset" value="Cancelar" id="cancelProject"><input type="submit" value="Criar" id="createProject">
         </form>
     </div>
 

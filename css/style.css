@@ -6,6 +6,9 @@
 :root {
     --padrao: rgb(0, 0, 0);
     --backgroundEditorpadrao: rgb(46, 46, 46);
+    --backgroundEditorDestaque: rgb(31, 31, 31);
+    --colorPadrao: rgb(255, 255, 255);
+    --larguraProjetos: 50vw;
 }
 body {
     background-color: var(--padrao);
@@ -16,90 +19,155 @@ h1 {
     margin: 10px auto;
     color: var(--padrao);
     font-size: 3rem;
-    color: white;
+    color: var(--colorPadrao);
 }
 
-#editor-form {
+#projetosArea {
+    color: var(--colorPadrao);
+    width: var(--larguraProjetos);
+    padding: 20px;
+    margin: 50px auto 0px auto;
+    border-radius: 10px;
+    border: 2px solid var(--colorPadrao);
+    background-color: var(--backgroundEditorpadrao);
+    height: 300px;
+    overflow-y: scroll;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    background-color: var(--padrao);
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 10px;
-    width: 50vw;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+#projetos-container {
+    display: flex;
+    padding: 20px;
+    border: 2px solid var(--colorPadrao);
+    width: 55vw;
+    margin: 5px auto;
+    flex-direction: column;
+}
+#projetosBar {
+    display: grid;
+    width: var(--larguraProjetos);
+    margin: 5px auto;
+    border: 2px solid var(--colorPadrao);
     align-items: center;
-    
-    margin: 10px auto;
+    background-color: var(--backgroundEditorpadrao);
+    grid-template-columns: 3fr 1fr;
+    color: var(--colorPadrao);
+    padding: 8px 8px 8px 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-#editor-form p {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1.4rem;
+#no-projects {
     text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
 }
-#editor-area, #editor-name {
-    background-color: var(--backgroundEditorpadrao);
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
+
+#addProjectButton {
+    width: 130px;
     font-size: 1.4rem;
-    padding-top: 5px;
-    padding-left: 10px;
-    border: 2px solid white;
-}
-#editor-area {
-    overflow-y: visible;
-}
-#editor-form input[type="submit"], #editor-form input[type="reset"] {
-    width: 100px;
-    padding: 2px;
-    font-size: 1.6rem;
+    border-radius: 10px;
+    border: 1px solid white;
     cursor: pointer;
-    background-color: var(--backgroundEditorpadrao);
-    border: 2px solid white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: white;
-    margin: 20px auto;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
     transition: all 400ms;
 }
-#editor-form select {
+#addProjectButton:hover {
+    transform: scale(1.1);
+    transition: all 400ms;
+    filter: brightness(0.7);
+}
+main {
+    z-index: 0;
+}
+#overlay {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(8px);
+}
+#projetoDesc {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    width: var(--larguraProjetos);
+    color: var(--colorPadrao);
     background-color: var(--backgroundEditorpadrao);
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    border-radius: 10px;
     font-size: 1.4rem;
-    width: 200px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 2px solid var(--colorPadrao);
+    z-index: 2;
+    top: 30vh;
+    margin: 10px auto;
+}
+#projetoDesc h2 {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.2rem;
     margin: 5px auto;
 }
-#editor-form input[type="submit"]:hover, #editor-form input[type="reset"]:hover {
+#projectForm {
+    display: grid;
+    gap: 8px;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+#projectForm input[type="text"]{
+    padding: 5px 5px 5px 10px;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    border-radius: 5px;
+    border: 2px solid var(--colorPadrao);
+    font-size: 1.2rem;
+}
+#projectForm input[type="reset"], #projectForm input[type="submit"] {
+    width: 110px;
+    margin: 10px auto;
+    font-size: 1.2rem;
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    border: 2px solid var(--colorPadrao);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 400ms;
+    padding: 5px;
+}
+#projectForm input[type="reset"]:hover, #projectForm input[type="submit"]:hover {
     transform: scale(1.1);
+    transition: all 400ms;
     filter: brightness(0.7);
+}
+
+.projeto {
+    background-color: var(--backgroundEditorDestaque);
+    color: var(--colorPadrao);
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    border: 2px solid var(--colorPadrao);
+    transition: all 400ms;
+    cursor: pointer;
+}
+
+.removeButton {
+    width: 32px;
+    position:relative;
+    right: -75px;
+    top: -50px;
     transition: all 400ms;
 }
-
-#editor-name {
-    padding-bottom: 5px;
-}
-
-#editor-container {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-    background-color: var(--padrao);
-    margin: 10px auto;
-}
-#editor-container h2 {
-    text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 2rem;
-    color: white;
-}
-
-@media screen and (min-width: 250px) and (max-width: 736px){
-    #editor-form {
-        grid-template-columns: 1fr;
-        width: 90vw;
-    }
-    #editor-container {
-        margin: 5px auto;
-        width: 90vw;
-    }
+.removeButton:hover {
+    transform: scale(1.2);
+    transition: all 400ms;
+    filter: brightness(0.6);
 }
