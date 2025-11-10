@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Teste de Editor de Texto</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap"
-        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/theme/material-darker.css">
+
 </head>
 
 <body>
@@ -29,7 +29,8 @@
         <form id="projectForm">
             <p>Digite o nome do projeto:</p>
             <input type="text" id="projectName" placeholder="Digite o nome" required>
-            <input type="reset" value="Cancelar" id="cancelProject"><input type="submit" value="Criar" id="createProject">
+            <input type="reset" value="Cancelar" id="cancelProject"><input type="submit" value="Criar"
+                id="createProject">
         </form>
     </div>
     <div id="projectEditorSpace">
@@ -41,6 +42,10 @@
             <div id="projectEditorStatus">
                 <h2 id="projectEditorStatusTitle">Explorador</h2>
                 <div id="projectEditorStatusArea"></div>
+            </div>
+            <div id="projectEditorDownload">
+                <h2 id="projectEditorDownloadTitle">Baixe seu projeto</h2>
+                <button id="downloadProject">Baixar projeto</button>
             </div>
         </div>
     </div>
@@ -68,12 +73,86 @@
             <p>Nome do arquivo:</p>
             <input type="text" id="fileEditorName" placeholder="Digite o nome aqui" required>
             <p>Edite o conteúdo do arquivo:</p>
-            <textarea id="fileContentEditor" rows="15" placeholder="Digite o texto aqui" required></textarea>
-            <input type="reset" value="Cancelar" id="cancelEdition"><input type="submit" value="Editar" id="editEdition">
+            <textarea id="fileContentEditor" rows="15" placeholder="Digite o texto aqui"></textarea>
+            <input type="reset" value="Cancelar" id="cancelEdition"><input type="submit" value="Editar"
+                id="editEdition">
         </form>
     </div>
 
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/xml/xml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/javascript/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/css/css.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/python/python.js"></script>
+
+    <!-- Biblioteca geradora de zip-->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+
+    <script>
+        const editor = CodeMirror.fromTextArea(document.getElementById("fileContentEditor"), {
+            lineNumbers: true,
+            mode: "htmlmixed",
+            theme: "material-darker",
+            tabSize: 4,
+            indentWithTabs: true
+        })
+        function checkChange() {
+            let type = ""
+            let mode = ""
+            JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
+                if (elemento.name == localStorage.getItem("projeto")) {
+                    elemento.arquivos.forEach(arquivo => {
+                        if (arquivo.name == localStorage.getItem("arquivo")) {
+                            type = arquivo.type
+                        }
+                    })
+                }
+            })
+            if (type == "py") {
+                mode = "python"
+            } else if (type == "html") {
+                mode = "htmlmixed"
+            } else if (type == "css") {
+                mode = "css"
+            } else if (type == "js") {
+                mode = "javascript"
+            } else if (type == "diretorio") {
+                mode = "htmlmixed"
+            } else if (type == "txt") {
+                mode = "htmlmixed"
+            }
+            return mode
+        }
+        const zip = new JSZip()
+
+        downloadProject.addEventListener("click", async () => {
+            Object.keys(zip.files).forEach(key => {
+                zip.remove(key)
+            })
+            JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
+                if (elemento.name == localStorage.getItem("projeto")) {
+                    elemento.arquivos.forEach(arquivo => {
+                        if (arquivo.type != "diretorio") {
+                            zip.file(`${arquivo.name}.${arquivo.type}`, arquivo.content)
+                        }
+                    })
+                }
+            })
+
+            const blob = await zip.generateAsync({type: "blob"})
+            const link = document.createElement("a")
+            link.href = URL.createObjectURL(blob)
+            link.download = `${localStorage.getItem("projeto")}.zip`
+            link.click()
+
+            URL.revokeObjectURL(link.href)
+
+        })
+
+    </script>
 </body>
 
 </html>

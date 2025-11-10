@@ -461,10 +461,42 @@ main {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
 #fileEditorForm textarea {
     background-color: var(--backgroundEditorDestaque);
     color: var(--colorPadrao);
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2rem;
     padding: 5px 5px 5px 10px;
+} 
+
+#projectEditorDownload {
+    background-color: var(--backgroundEditorpadrao);
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--colorPadrao);
+}
+#projectEditorDownloadTitle {
+    font-size: 1.4rem;
+}
+
+#downloadProject {
+    position: relative;
+    top: 20px;
+    padding: 5px;
+    font-size: 1.4rem;
+    color: var(--colorPadrao);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: var(--backgroundEditorDestaque);
+    cursor: pointer;
+    width: 180px;
+    transition: all 400ms;
+}
+#downloadProject:hover {
+    transition: all 400ms;
+    transform: scale(1.1);
+    filter: brightness(0.7);
 }

@@ -18,6 +18,11 @@ const projectsContainer = document.getElementById("projetos-container")
 const backToProjectsArea = document.getElementById("backToProjectsArea")
 const fileEditor = document.getElementById("fileEditor")
 const cancelEdition = document.getElementById("cancelEdition")
+const fileEditorName = document.getElementById("fileEditorName")
+const fileContentEditor = document.getElementById("fileContentEditor")
+const editButton = document.getElementById("editEdition")
+const downloadProject = document.getElementById("downloadProject")
+const projectEditorDownload = document.getElementById("projectEditorDownload")
 
 function atualizarProjetos() {
     projetos.innerHTML = ""
@@ -57,6 +62,7 @@ function atualizarProjetos() {
     })
 }
 function atualizarProjeto(){
+    downloadProject.style.left = `${(projectEditorDownload.offsetWidth - downloadProject.offsetWidth)/2}px`
     projectTitle.innerHTML = `Projeto em edição: ${localStorage.getItem("projeto")}`
     let arquivos = []
     JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
@@ -106,9 +112,24 @@ function atualizarProjeto(){
             })
             document.getElementById(`${arquivo.name}edit`).addEventListener("click", function(){
                 overlay.style.display = "block"
+                localStorage.setItem("arquivo", `${arquivo.name}`)
                 fileEditor.style.display = "flex"
+                fileEditorName.value= `${localStorage.getItem("arquivo")}`
+                let conteudo = ""
+                
+                JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
+                    if(elemento.name == localStorage.getItem("projeto")){
+                        elemento.arquivos.forEach(arquivo => {
+                            if(arquivo.name == localStorage.getItem("arquivo")){
+                                conteudo = arquivo.content
+                            }
+                        })
+                    }
+                })
+                editor.setValue(conteudo)
                 fileEditor.style.top = `${(document.body.offsetHeight - fileEditor.offsetHeight/2)/2}px`
                 fileEditor.style.left = `${(document.body.offsetWidth - fileEditor.offsetWidth)/2}px`
+                editor.setOption("mode", checkChange())
             })
         })
     }
@@ -131,7 +152,7 @@ createFile.addEventListener("click", function(e){
         e.preventDefault()
         overlay.style.display = "none"
         fileMaker.style.display = "none"
-        let arquivo = {name:fileName.value, type:fileType.value}
+        let arquivo = {name:fileName.value, type:fileType.value, content:``}
         let desatualizado = JSON.parse(localStorage.getItem("projetos"))
         desatualizado.forEach(elemento => {
             if(elemento.name == localStorage.getItem("projeto")){
@@ -187,4 +208,25 @@ backToProjectsArea.addEventListener("click", function(){
 cancelEdition.addEventListener("click", function(){
     overlay.style.display = "none"
     fileEditor.style.display = "none"
+})
+
+editButton.addEventListener("click", function(e){
+    if(localStorage.hasOwnProperty("arquivo")){
+        e.preventDefault()
+        let desatualizado = JSON.parse(localStorage.getItem("projetos"))
+        desatualizado.forEach(elemento => {
+            if(elemento.name == localStorage.getItem("projeto")){
+                elemento.arquivos.forEach(arquivo => {
+                    if(arquivo.name == localStorage.getItem("arquivo")){
+                        arquivo.content = editor.getValue()
+                        
+                    }
+                })
+            }
+        })
+        localStorage.setItem("projetos", JSON.stringify(desatualizado))
+        fileEditor.style.display = "none"
+        overlay.style.display = "none"
+        atualizarProjeto()
+    }
 })
