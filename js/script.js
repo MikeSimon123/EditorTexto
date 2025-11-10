@@ -62,7 +62,9 @@ function atualizarProjetos() {
     })
 }
 function atualizarProjeto(){
-    downloadProject.style.left = `${(projectEditorDownload.offsetWidth - downloadProject.offsetWidth)/2}px`
+    if(document.body.offsetWidth > 400){
+        downloadProject.style.left = `${(projectEditorDownload.offsetWidth - downloadProject.offsetWidth)/2}px`
+    }
     projectTitle.innerHTML = `Projeto em edição: ${localStorage.getItem("projeto")}`
     let arquivos = []
     JSON.parse(localStorage.getItem("projetos")).forEach(elemento => {
@@ -127,8 +129,10 @@ function atualizarProjeto(){
                     }
                 })
                 editor.setValue(conteudo)
-                fileEditor.style.top = `${(document.body.offsetHeight - fileEditor.offsetHeight/2)/2}px`
-                fileEditor.style.left = `${(document.body.offsetWidth - fileEditor.offsetWidth)/2}px`
+                if(document.body.offsetWidth > 400){
+                    fileEditor.style.top = `${(document.body.offsetHeight - fileEditor.offsetHeight/2)/2}px`
+                    fileEditor.style.left = `${(document.body.offsetWidth - fileEditor.offsetWidth)/2}px`
+                }
                 editor.setOption("mode", checkChange())
             })
         })
@@ -139,8 +143,11 @@ addFileButton.addEventListener("click", function(){
         overlay.style.display = "block"
         
         fileMaker.style.display = "flex"
-        fileMaker.style.top = `${(document.body.offsetHeight - fileMaker.offsetHeight)/2}px`
-        fileMaker.style.left = `${(document.body.offsetWidth - fileMaker.offsetWidth)/2}px`
+        if(document.body.offsetWidth > 400){
+            fileMaker.style.top = `${(document.body.offsetHeight - fileMaker.offsetHeight)/2}px`
+            fileMaker.style.left = `${(document.body.offsetWidth - fileMaker.offsetWidth)/2}px`
+        }
+        
     }
 })
 cancelFile.addEventListener("click", function(){
@@ -195,8 +202,11 @@ createProject.addEventListener("click", function(){
 addProjectButton.addEventListener("click", function(){
     overlay.style.display = "block"
     formAddProject.style.display = "flex"
-    formAddProject.style.top = `${(document.body.offsetHeight - formAddProject.offsetHeight)/2}px`
-    formAddProject.style.left = `${(document.body.offsetWidth - formAddProject.offsetWidth)/2}px`
+    if(document.body.offsetWidth > 400){
+        formAddProject.style.top = `${(document.body.offsetHeight - formAddProject.offsetHeight)/2}px`
+        formAddProject.style.left = `${(document.body.offsetWidth - formAddProject.offsetWidth)/2}px`
+    }
+    
 })
 
 backToProjectsArea.addEventListener("click", function(){

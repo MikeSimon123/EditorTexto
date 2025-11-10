@@ -500,3 +500,152 @@ main {
     transform: scale(1.1);
     filter: brightness(0.7);
 }
+
+@media screen and (min-width: 260px) and (max-width: 400px){
+    h1 {
+        font-size: 1.9rem;
+    }
+    #projetos-container, #projetosBar, #projetosArea {
+        width: 85vw;
+    }
+    #projetosBar {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        width: 70vw;
+    }
+    #projetosBar h2 {
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    #projetosBar button {
+        margin: 0 auto;
+    }
+    #projetosArea {
+        width: 70vw;
+        grid-template-columns: 1fr;
+    }
+    #projetoDesc {
+        width: 85vw;
+        left: 25px;
+    }
+    #projectForm input[type='text']{
+        width: 180px;
+        margin: 0px auto;
+    }
+    #projetoDesc h2 {
+        font-size: 1.5rem;
+    }
+    #projectForm p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    #projectForm {
+        grid-template-columns: 1fr;
+    }
+    .projeto {
+        transform: scale(0.85);
+    }
+    #projetosArea {
+        padding: 5px;
+    }
+    #projectEditorSpace {
+        width: 85vw;
+        gap: 15px;
+        padding: 10px;
+    }
+    #projectEditorBar {
+        width: 75vw;
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+    }
+    #projectEditorBar h2{
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    #projectEditorBar button {
+        margin: 10px auto;
+    }
+    #projectEditorStatusContainer {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    #projectEditorStatusContainer h2 {
+        text-align: center;
+    }
+    #projectEditorStatus, #projectEditorDownload {
+        margin: 0 auto;
+        width: 75vw;
+    }
+    #downloadProject {
+        position: inherit;
+        transform: scale(0.9);
+        margin: 5px auto;
+    }
+    #downloadProject:hover {
+        transform: scale(1);
+    }
+    #backToProjectsArea {
+        width: 75vw;
+        font-size: 1.2rem;
+        margin: 10px auto;
+    }
+    #fileEditor, #fileMaker {
+        width: 85vw;
+        left: 25px;
+    }
+    #fileMaker {
+        top: 130px;
+    }
+    #fileMaker h2 {
+        font-size: 1.5rem;
+    }
+    #fileMaker p {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    #fileMakerForm {
+        grid-template-columns: 1fr;
+    }
+    #fileMakerForm input[type='text']{
+        width: 180px;
+    }
+    .file {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .removeFileButton {
+        position: inherit;
+        margin: 10px auto;
+    }
+    #fileEditor {
+        top: 130px;
+        padding: 5px;
+        align-items: center;
+    }
+    #fileEditor h2 {
+        font-size: 1.5rem;
+    }
+    #fileEditor p {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    #fileEditor {
+        justify-content: center;
+    }
+    #fileEditorForm {
+        grid-template-columns: 1fr;
+        margin: 10px auto;
+        width: 75vw;
+    }
+    #fileEditorForm input[type='text']{
+        width: 180px;
+        margin: 5px auto;
+    }
+}
+
+@media screen and (min-width: 401px) and (max-width: 760px){
+    #projetosArea {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
