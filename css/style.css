@@ -501,7 +501,7 @@ main {
     filter: brightness(0.7);
 }
 
-@media screen and (min-width: 260px) and (max-width: 400px){
+@media screen and (min-width: 260px) and (max-width: 600px){
     h1 {
         font-size: 1.9rem;
     }
@@ -641,11 +641,5 @@ main {
     #fileEditorForm input[type='text']{
         width: 180px;
         margin: 5px auto;
-    }
-}
-
-@media screen and (min-width: 401px) and (max-width: 760px){
-    #projetosArea {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
